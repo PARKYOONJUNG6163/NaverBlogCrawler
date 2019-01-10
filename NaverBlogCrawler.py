@@ -17,7 +17,7 @@ import pymysql
 
 
 def save_DB() : 
-    conn = pymysql.connect(host = "147.43.122.34", user = "root", password = "1234", charset = "utf8")
+    conn = pymysql.connect(host = "", user = "root", password = "", charset = "utf8")
     curs = conn.cursor()
     
     curs.execute("use naver_blog ;")
@@ -182,7 +182,7 @@ while dt_start_1 <= dt_end_date :
 
 
 # DB내용 확인시 이용
-# conn = pymysql.connect(host = "147.43.122.34", user = "root", password = "1234", charset = "utf8")
+# conn = pymysql.connect(host = "", user = "root", password = "", charset = "utf8")
 # curs = conn.cursor()
 # curs.execute("use naver_blog ;")
 # query = """select * from 파이썬라이브러리; """
