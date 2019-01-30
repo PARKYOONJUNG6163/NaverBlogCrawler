@@ -33,21 +33,22 @@ def createDB(conn,dbname):
 
 
 def save_DB() : 
+    temp = keyword.replace(' ','_')
     conn = pymysql.connect(host = "", user = "root", password = "", charset = "utf8")
-    dbname = 'naver_blog_'+ keyword
+    dbname = 'naver_blog_'+ temp
     createDB(conn,dbname)
     curs = conn.cursor()
     curs.execute("""use """+dbname)
 
-    query = """CREATE TABLE IF NOT EXISTS """+ keyword + """(ID int, URL varchar(100), Title varchar(100), Date varchar(20), Writer varchar(50), blog_like int, Count int,Text text(62200));"""
+    query = """CREATE TABLE IF NOT EXISTS """+ temp + """(ID int, URL varchar(100), Title varchar(100), Date varchar(20), Writer varchar(50), blog_like int, Count int,Text text(62200));"""
     curs.execute(query)
 
-    query = """ALTER TABLE """ + keyword +""" CHARACTER SET utf8 COLLATE utf8_general_ci;"""
+    query = """ALTER TABLE """ + temp +""" CHARACTER SET utf8 COLLATE utf8_general_ci;"""
     curs.execute(query)
 
     conn.commit()
     
-    select_query = """SELECT * from """ + keyword 
+    select_query = """SELECT * from """ + temp
     index = curs.execute(select_query)
 
     for value in total_list :
@@ -59,7 +60,7 @@ def save_DB() :
         count = value[5]
         content = value[6]
 
-        query = """insert into """ + keyword + """(ID, URL, Title, Date, Writer, blog_like, Count, Text) values (%s, %s, %s, %s, %s, %s, %s, %s) ; """
+        query = """insert into """ + temp + """(ID, URL, Title, Date, Writer, blog_like, Count, Text) values (%s, %s, %s, %s, %s, %s, %s, %s) ; """
         curs.execute(query, (str(index), url, title, date,writer,like,count,content))
 
         index = index + 1 
